@@ -93,9 +93,9 @@ body{
             outline: none;
         }
 
-        input[type="radio"]:checked + label + .radio-group {
-            background-color: lightblue;
-        }
+        // input[type="radio"]:checked + label + .radio-group {
+        //     background-color: lightblue;
+        // }
 
         .radio-group{
             display: flex;
@@ -162,6 +162,7 @@ body{
         }
         // input[type="radio"]:checked + label::after {
         //     background-color: $GrayDark;
+           
         //   }
         
           input[type="radio"]:checked + label::before {
@@ -250,11 +251,33 @@ body{
 @media (min-width: 1024px) {
     .contact-form {
         width: 800px;
-        background-color: red;
     }
 
     .form-group{
-        flex-direction: row;
+        // flex-direction: column;
+        display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
+
+        .radio-group-response{
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            width: calc(100% - 20px);
+            margin-top: 5px;
+        }
+
+        textarea{
+            height: 120px;
+        }
     }
+
+    .input-group-response{
+       display: flex;
+       justify-content: space-between;
+       gap: 10px;
+       width: 100%;
+
+    }
+    
 }
