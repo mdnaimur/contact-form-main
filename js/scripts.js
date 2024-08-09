@@ -6,18 +6,19 @@
 // Select contact form
 
 let form = document.querySelector("#contact-form");
-
+const success = document.querySelector('div.success');
 
 
 // form.addEventListener("submit")
 
-form.addEventListener("submit",validateForm)
+if(form){
+    form.addEventListener("submit",validateForm)
+}
 
 
 function validateForm(e){
-    console.log(' i am working inside validation form ')
     clearErrors();
-    let isValid = false;
+    let isValid = true;
 
     
     let fname = document.getElementById("first-name");
@@ -29,8 +30,6 @@ function validateForm(e){
     let message = document.getElementById("message");
 
     let checkbox = document.getElementById("consent");
-
-    console.log('checkbox',checkbox)
     
 
     if(fname.value.trim() === ''){
@@ -53,7 +52,7 @@ function validateForm(e){
         isValid = false;
     }
 
-    //Query type validation
+    // Query type validation
     // const queryType = document.querySelector('input[name="query-type"]:checked');
     // console.log (queryType)
     // if(!queryType){
@@ -76,21 +75,38 @@ function validateForm(e){
         e.preventDefault();
       } 
       else {
-        e.preventDefault(); // Prevent form submission to show the success message for this example
-        successMessage.style.display = 'block';
-        alert("Message Sent! Thanks for completing the form. We'll be in touch soon!");
-       // form.reset(); // Reset the form fields
+        e.preventDefault(); 
+
+        window.scroll({
+            top: 0,
+            behavior: 'smooth'
+        });
+
+        setTimeout(() => {
+            success.classList.add('submitted');
+        }, 300);
+        
+        setTimeout(() => {
+            success.classList.remove('submitted');
+        }, 5000);
+
+       form.reset(); // Reset the form fields
       }
 
 }
 
 
 function showError(element,message){
-    console.log('Inside show error',element,message)
-    const errorSpan = element.closest('.form-group, .input-group-response, .checkbox-group, .radio-group-response').querySelector('.error-message');
-    errorSpan.textContent = message;
-    errorSpan.style.display = 'block';
-    element.classList.add('error');
+    // console.log('Inside show error',element,message)
+
+    const errorSpan = element.closest('.form-group, .input-group-response, .name-area , .checkbox-group, .radio-group-response')?.querySelector('.error-message');
+    if (errorSpan) {  // Check if errorSpan is not null
+        errorSpan.textContent = message;
+        errorSpan.style.display = 'block';
+        element.classList.add('error');
+    } else {
+        console.error('Error span not found for', element);
+    }
 }
 
 
